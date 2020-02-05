@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mb-5">
+            <div class="column">
+                <div class="banner_c">
+                    <h2>No queremos escuchar más:</h2>
+                    <h3>
+                        <div class="tlt">
+                            {% if msge_list %}
+                            <ul class="texts">
+                                
+                                {% for msge in msge_list %}
+                                <li>
+                                    {{ msge.body }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="row mb-5">
+            <div class="column">
+                <div class="input_p">
+                    <h3>Contanos lo que vos tampoco querés escuchar más:</h3>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="body" id="body">
+                        <button type="submit" class="btn btn-success">Enviar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
