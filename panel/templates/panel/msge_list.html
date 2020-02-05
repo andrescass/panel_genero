@@ -30,8 +30,12 @@
                     <h3>Contanos lo que vos tampoco querés escuchar más:</h3>
                     <form action="" method="POST">
                         {% csrf_token %}
-                        <input type="text" name="body" id="body">
-                        <button type="submit" class="btn btn-success">Enviar</button>
+                        <div class="row mb-2">
+                            <textarea name="body" id="body" rows="4" cols="80"></textarea>
+                        </div>
+                        <div class="row mb-2">
+                            <button type="submit" class="btn btn-success">Enviar</button>
+                        </div>
                     </form>
 
                 </div>

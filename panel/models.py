@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from django import forms
 
 # Create your models here.
 
@@ -11,7 +12,7 @@ class CustomUser(AbstractUser):
         return self.username
 
 class Msge(models.Model):
-    body = models.CharField(max_length=280)
+    body = models.TextField(max_length=280)
     msge_id = models.IntegerField(null=True)
     timestamp = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=20)
