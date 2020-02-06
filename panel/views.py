@@ -18,6 +18,9 @@ class MsgeView(FormMixin, generic.ListView):
         context['form'] = NewMsgeForm()
         return context
     
+    def get_queryset(self):
+       return Msge.objects.order_by('?')
+
     def get_success_url(self):
         return reverse('index')
 
