@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <div class="row mb-5">
-            <div class="column">
+            <!--div class="column"-->
                 <div class="banner_c">
                     <h2>No queremos escuchar más:</h2>
                     <h3>
@@ -12,7 +12,7 @@
                             <ul class="texts">
                                 
                                 {% for msge in msge_list %}
-                                <li>
+                                <li class="raleway_class">
                                     {{ msge.body }}
                                 </li>
                                 {% endfor %}
@@ -21,23 +21,23 @@
                         </div>
                     </h3>
                 </div>
-            </div>
+            <!--/div-->
         </div>
         <div class="row"></div>
+        <div class="row mb-5"></div>
         <div class="row mb-5">
             <div class="column">
                 <div class="input_p">
                     <h3>Contanos lo que vos tampoco querés escuchar más:</h3>
-                    <form action="" method="POST">
+                    <form action="" method="POST" style="margin-left: 12px;">
                         {% csrf_token %}
                         <div class="row mb-2">
-                            <textarea name="body" id="body" rows="4" cols="80"></textarea>
+                            <textarea name="body" id="body" rows="4" cols="91"></textarea>
                         </div>
                         <div class="row mb-2">
                             <button type="submit" class="btn btn-success">Enviar</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
