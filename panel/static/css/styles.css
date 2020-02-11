@@ -34,7 +34,7 @@
     margin-left: 0px;
 }
 
-.btn {
+.btn_w {
     background-color: white;
     color: black;
     border-color: white;
@@ -69,4 +69,8 @@
          url('/static/BadSignal.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+
+#wordcloud {
+    background: url("/static/wordcloud2.jpg") 50% -70% no-repeat fixed;
 }

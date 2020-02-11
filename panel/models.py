@@ -16,7 +16,8 @@ class Msge(models.Model):
     msge_id = models.IntegerField(null=True, blank=True)
     timestamp = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=20)
-    last_st_change_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    last_st_change_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    id = models.AutoField(primary_key=True)
 
     class Meta:
         ordering = ["msge_id"]
