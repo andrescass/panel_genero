@@ -8,6 +8,30 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+		
+		img.bg {
+			/* Set rules to fill background */
+			min-height: 100%;
+			min-width: 1024px;
+			
+			/* Set up proportionate scaling */
+			width: 100%;
+			height: auto;
+			
+			/* Set up positioning */
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+		
+		@media screen and (max-width: 1024px){
+			img.bg {
+				left: 50%;
+				margin-left: -512px; }
+    }
+    #page-wrap { position: relative; }
+  </style>
 
   <!-- Add additional CSS in static file -->
   {% load static %}
@@ -17,8 +41,9 @@
   <script type="text/javascript" language="Javascript" src='/static/js/jquery.lettering.js'></script>
 </head>
 
-<body >
-
+<body id="wordcloud">
+  <img src="/static/wordcloud2.jpg" class="bg">
+  <div id="page-wrap">
   <!--div class="container-fluid"-->
 
     <!--div class="row"-->
@@ -53,8 +78,8 @@
       <!--/ul-->
      {% endblock %}
       <!--/div-->
-      <div style="height: 100vh; background-color: rgb(155, 139, 189); width: 100%;" class="jumbotron">
-        <div class="container">
+      <div style="height: 100vh; margin-top: 50px;">
+        <div class="container" style="margin-top: 50px;">
           {% block content %}{% endblock %}
         </div>
         <div id="footer" style="background-color: rgb(128, 109, 170);">
@@ -65,7 +90,7 @@
       </div>
     <!--/div-->
 
-  <!--/div-->
+  </div>
 
   <script>
     $(function () {

@@ -71,6 +71,14 @@
     font-style: normal;
 }
 
-#wordcloud {
+/*#wordcloud {
     background: url("/static/wordcloud2.jpg") 50% -70% no-repeat fixed;
-}
+}*/
+
+.htmlo { 
+    background-image: url(/static/wordcloud2.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }

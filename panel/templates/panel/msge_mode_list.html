@@ -1,17 +1,25 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    {% if msge_list %}
-        <!--ul-->
-            {% for msge in msge_list %}
-                {% if msge.status == 'pendiente' %}
-                <form action="" method="POST" style="margin-left: 12px;">
-                    {% csrf_token %}
-                    <div style="font-size: larger; font-weight: bold;"> {{ msge.timestamp}} - {{ msge.body}} --- <button type="submit" value="✓" name="mode-ok" class="btn btn-success btn-xs">Ok</button> -- <input type="submit" value="X" name="mode-rej" class="btn btn-danger btn-xs"></div>
-                    <input type="hidden" value="{{ msge.id }}" name="msge_id">
-                </form>
-                {% endif %}
-            {% endfor %}
-        <!--/ul-->
+    {% if user.is_authenticated %}
+        {% if user.is_admin %}
+            {% if msge_list %}
+                <!--ul-->
+                    {% for msge in msge_list %}
+                        {% if msge.status == 'pendiente' %}
+                        <form action="" method="POST" style="margin-left: 12px; margin-top: 5%;">
+                            {% csrf_token %}
+                            <div style="font-size: larger; font-weight: bold; margin-top: 5%;"> {{ msge.timestamp}} - {{ msge.body}} --- <button type="submit" value="✓" name="mode-ok" class="btn btn-success btn-xs">Ok</button> -- <input type="submit" value="X" name="mode-rej" class="btn btn-danger btn-xs" ></div>
+                            <input type="hidden" value="{{ msge.id }}" name="msge_id">
+                        </form>
+                        {% endif %}
+                    {% endfor %}
+                <!--/ul-->
+            {% endif %}
+        {% else %}
+            <p>Usted no debería estar aquí. Vuelva a </p><li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Casao</a></li>
+        {% endif %}
+    {% else %}
+        <p style="font-weight: bold;">Usted no debería estar aquí. Vuelva a <a style="color: mintcream;" href="{% url 'index' %}">Casa</a></p>
     {% endif %}
 {% endblock %}
