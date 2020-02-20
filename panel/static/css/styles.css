@@ -75,10 +75,18 @@
     background: url("/static/wordcloud2.jpg") 50% -70% no-repeat fixed;
 }*/
 
-.htmlo { 
-    background-image: url(/static/wordcloud2.jpg) no-repeat center center fixed; 
+.htmlo {
+    background-image: url(/static/wordcloud2.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+  }
+
+  .cenetered-div {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
   }

@@ -19,7 +19,7 @@ class MsgeView(FormMixin, generic.ListView):
         context = super(MsgeView, self).get_context_data(**kwargs)
         context['form'] = NewMsgeForm()
         return context
-    
+
     def get_queryset(self):
        return Msge.objects.filter(status='ok').order_by('?')
 
@@ -44,7 +44,7 @@ class MsgeSuccView(FormMixin, generic.ListView):
         context = super(MsgeSuccView, self).get_context_data(**kwargs)
         context['form'] = NewMsgeForm()
         return context
-    
+
     def get_queryset(self):
        return Msge.objects.filter(status='ok').order_by('?')
 
@@ -59,6 +59,21 @@ class MsgeSuccView(FormMixin, generic.ListView):
             msge_.status = 'pendiente'
             msge_.save()
             return super(MsgeSuccView, self).form_valid(form)
+
+class MsgeShowView(generic.ListView):
+    model = Msge
+    template_name = 'panel/msge_show.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MsgeShowView, self).get_context_data(**kwargs)
+        context['form'] = NewMsgeForm()
+        return context
+
+    def get_queryset(self):
+       return Msge.objects.filter(status='ok').order_by('?')
+
+    def get_success_url(self):
+        return reverse('greetings')
 
 class MsgeModeView(FormMixin, generic.ListView):
     model = Msge
@@ -87,7 +102,7 @@ class MsgeModeView(FormMixin, generic.ListView):
             else:
                 print('fallo')
                 return super(MsgeModeView, self).form_valid(form)
-                
+
 
         if "mode-rej" in request.POST:
             if form.is_valid():
@@ -110,7 +125,7 @@ def index(request):
             return redirect('index')
     else:
         form = NewMsgeForm()
-        
+
     return render(request, 'panel/panel.html')
 
 @csrf_protect

@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class="container" id="wordcloud">
+        <div class="row mb-5">
+            <!--div class="column"-->
+                <div class="banner_c">
+                    <h2>No queremos escuchar más:</h2>
+                    <h3>
+                        <div class="tlt">
+                            {% if msge_list %}
+                            <ul class="texts">
+
+                                {% for msge in msge_list %}
+                                <li class="raleway_class">
+                                    {{ msge.body }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </h3>
+                </div>
+            <!--/div-->
+        </div>
+    </div>
+{% endblock %}
