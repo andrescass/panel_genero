@@ -9,7 +9,7 @@
                         {% if msge.status == 'pendiente' %}
                         <form action="" method="POST" style="margin-left: 12px; margin-top: 5%;">
                             {% csrf_token %}
-                            <div style="font-size: larger; font-weight: bold; margin-top: 5%;"> {{ msge.timestamp}} - {{ msge.body}} --- <button type="submit" value="✓" name="mode-ok" class="btn btn-success btn-xs">Ok</button> -- <input type="submit" value="X" name="mode-rej" class="btn btn-danger btn-xs" ></div>
+                            <div style="font-size: large; font-weight: bold; margin-top: 5%;"> {{ msge.timestamp }} - {{ msge.body}} --- <button type="submit" value="✓" name="mode-ok" class="btn btn-success btn-xs">Ok</button> -- <input type="submit" value="X" name="mode-rej" class="btn btn-danger btn-xs" ></div>
                             <input type="hidden" value="{{ msge.id }}" name="msge_id">
                         </form>
                         {% endif %}
