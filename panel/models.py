@@ -21,4 +21,5 @@ class Msge(models.Model):
 
     class Meta:
         ordering = ["msge_id"]
+
     

@@ -85,6 +85,9 @@ class MsgeModeView(FormMixin, generic.ListView):
         context['form'] = MsgeModeForm()
         return context
 
+    def get_queryset(self):
+       return Msge.objects.order_by('-timestamp')
+
     def get_success_url(self):
         return reverse('comments')
 
