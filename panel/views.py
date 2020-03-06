@@ -117,6 +117,48 @@ class MsgeModeView(FormMixin, generic.ListView):
                 msge_.save()
                 return super(MsgeModeView, self).form_valid(form)
 
+class MsgeAllView(FormMixin, generic.ListView):
+    model = Msge
+    form_class = MsgeModeForm
+    template_name = 'panel/msge_all.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MsgeAllView, self).get_context_data(**kwargs)
+        context['form'] = MsgeModeForm()
+        return context
+
+    def get_queryset(self):
+       return Msge.objects.order_by('-timestamp')
+
+    def get_success_url(self):
+        return reverse('comments')
+
+    def post(self, request):
+        form = MsgeModeForm(request.POST)
+        if "mode-ok" in request.POST:
+            if form.is_valid():
+                msge_ = Msge.objects.get(id=int(request.POST['msge_id']))
+                #msge_.id = int(request.POST['msge_id'])
+                msge_.timestamp = timezone.now()
+                msge_.last_st_change_by = request.user
+                msge_.status = 'ok'
+                msge_.save()
+                return super(MsgeAllView, self).form_valid(form)
+            else:
+                print('fallo')
+                return super(MsgeAllView, self).form_valid(form)
+
+
+        if "mode-rej" in request.POST:
+            if form.is_valid():
+                msge_ = Msge.objects.get(id=int(request.POST['msge_id']))
+                #msge_.id = int(request.POST['msge_id'])
+                msge_.timestamp = timezone.now()
+                msge_.last_st_change_by = request.user
+                msge_.status = 'rej'
+                msge_.save()
+                return super(MsgeAllView, self).form_valid(form)
+
 def index(request):
     if request.method == "POST":
         form = NewMsgeForm(request.POST)

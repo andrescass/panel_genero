@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^greetings/$', views.MsgeSuccView.as_view(), name='greetings'),
     url(r'^show/$', views.MsgeShowView.as_view(), name='show'),
     url(r'^comments/$', views.MsgeModeView.as_view(), name='comments'),
+    url(r'^all/$', views.MsgeAllView.as_view(), name='all'),
 ]

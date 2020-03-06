@@ -64,6 +64,7 @@
                   {% if user.is_authenticated %}
                     <!--li>User: {{ user.get_username }}</li-->
                     <li class="nav-item active"><a class="nav-link" href="{% url 'comments' %}">Moderar</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'all' %}">Todos</a></li>
                     <!--li class="nav-item active"><a class="nav-link" href="{% url 'index' %}?next={{request.path}}">Logout</a></li-->
                     <li class="nav-item active"><a class="nav-link" href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
                   {% else %}
