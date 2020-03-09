@@ -8,6 +8,7 @@ from django.views import generic
 from django.views.generic.edit import FormMixin
 from django.urls import reverse
 from django.contrib.auth import login, authenticate
+from openpyxl import Workbook
 
 # Create your views here.
 class MsgeView(FormMixin, generic.ListView):
@@ -134,30 +135,47 @@ class MsgeAllView(FormMixin, generic.ListView):
         return reverse('comments')
 
     def post(self, request):
-        form = MsgeModeForm(request.POST)
-        if "mode-ok" in request.POST:
-            if form.is_valid():
-                msge_ = Msge.objects.get(id=int(request.POST['msge_id']))
-                #msge_.id = int(request.POST['msge_id'])
-                msge_.timestamp = timezone.now()
-                msge_.last_st_change_by = request.user
-                msge_.status = 'ok'
-                msge_.save()
-                return super(MsgeAllView, self).form_valid(form)
-            else:
-                print('fallo')
-                return super(MsgeAllView, self).form_valid(form)
+        messages = Msge.objects.order_by('-timestamp')
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=export.xlsx'
 
 
-        if "mode-rej" in request.POST:
-            if form.is_valid():
-                msge_ = Msge.objects.get(id=int(request.POST['msge_id']))
-                #msge_.id = int(request.POST['msge_id'])
-                msge_.timestamp = timezone.now()
-                msge_.last_st_change_by = request.user
-                msge_.status = 'rej'
-                msge_.save()
-                return super(MsgeAllView, self).form_valid(form)
+        wb = Workbook()
+        ws = wb.create_sheet()
+
+        worksheet = wb.active
+        
+        # Define the titles for columns
+        columns = [
+            'Fecha',
+            'Mensaje',
+            'Estado',
+        ]
+        row_num = 1
+
+        # Assign the titles for each cell of the header
+        for col_num, column_title in enumerate(columns, 1):
+            cell = worksheet.cell(row=row_num, column=col_num)
+            cell.value = column_title
+
+        for msg in messages:
+            row_num += 1
+            
+            # Define the data for each cell in the row 
+            row = [
+                msg.timestamp,
+                msg.body,
+                msg.status,
+            ]
+            
+            # Assign the data for each cell of the row 
+            for col_num, cell_value in enumerate(row, 1):
+                cell = worksheet.cell(row=row_num, column=col_num)
+                cell.value = cell_value
+
+        wb.save(response)
+
+        return response
 
 def index(request):
     if request.method == "POST":

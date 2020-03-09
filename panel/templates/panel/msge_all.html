@@ -7,14 +7,15 @@
                 <!--ul-->
                     {% for msge in msge_list %}
                     {% if msge.status == 'ok' %}
-                        <form action="" method="POST" style="margin-left: 12px; margin-top: 5%;">
                             {% csrf_token %}
                             <div style="font-size: large; font-weight: bold; margin-top: 5%;"> {{ msge.timestamp }} - {{ msge.body}} <!--i> {{msge.status}} </i--></div>
-                            <input type="hidden" value="{{ msge.id }}" name="msge_id">
-                        </form>
                     {% endif %}
                     {% endfor %}
                 <!--/ul-->
+                <form action="" method="POST" style="margin-left: 12px; margin-top: 5%;">
+                    {% csrf_token %}
+                    <button type="submit" name="mode-ok" class="btn btn-success btn-xs">Exportar</button>
+                </form>
             {% endif %}
         {% else %}
             <p>Usted no debería estar aquí. Vuelva a </p><li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Casao</a></li>
